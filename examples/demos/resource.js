@@ -1,6 +1,7 @@
 import React from 'react'
 import { Calendar, Views } from 'react-big-calendar'
 import ExampleControlSlot from '../ExampleControlSlot'
+import moment from 'moment'
 
 const events = [
   {
@@ -44,6 +45,7 @@ const resourceMap = [
 let Resource = ({ localizer }) => (
   <>
     <Calendar
+      min={moment('10:00am', 'h:mma').toDate()}
       events={events}
       localizer={localizer}
       defaultView={Views.DAY}

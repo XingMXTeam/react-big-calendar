@@ -29,6 +29,7 @@ import Dnd from './demos/dnd'
 import DndOutsideSource from './demos/dndOutsideSource'
 import Dropdown from 'react-bootstrap/lib/Dropdown'
 import MenuItem from 'react-bootstrap/lib/MenuItem'
+import CustomHeader from './demos/customHeader'
 
 const globalizeLocalizer = localizer(globalize)
 
@@ -48,6 +49,7 @@ const EXAMPLES = {
   dnd: 'Addon: Drag and drop',
   dndresource: 'Resource Drag and drop',
   dndOutsideSource: 'Addon: Drag and drop (from outside calendar)',
+  customHeader: 'CustomHeader'
 }
 
 const DEFAULT_EXAMPLE = 'basic'
@@ -85,6 +87,7 @@ class Example extends React.Component {
       dndresource: DndResource,
       dndOutsideSource: DndOutsideSource,
       createEventWithNoOverlap: CreateEventWithNoOverlap,
+      customHeader: CustomHeader
     }[selected]
 
     return (

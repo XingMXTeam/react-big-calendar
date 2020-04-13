@@ -9,6 +9,7 @@ import {
   DayLayoutAlgorithmPropType,
   views as componentViews,
 } from './utils/propTypes'
+import warning from 'warning'
 
 import { notify } from './utils/helpers'
 import { navigate, views } from './utils/constants'
@@ -486,23 +487,14 @@ class Calendar extends React.Component {
 
     /**
      * Optionally provide a function that returns an object of className or style props
-     * to be applied to the time-slot node. Caution! Styles that change layout or
+     * to be applied to the the time-slot node. Caution! Styles that change layout or
      * position may break the calendar in unexpected ways.
      *
      * ```js
      * (date: Date, resourceId: (number|string)) => { className?: string, style?: Object }
      * ```
      */
-	slotPropGetter: PropTypes.func,
-	
-	/**
-	 * Optionally provide a function that returns an object of props to be applied 
-	 * to the time-slot group node. Useful to dynamically change the sizing of time nodes.
-	 * ```js
-	 * () => { style?: Object }
-	 * ```
-	 */
-	slotGroupPropGetter: PropTypes.func,
+    slotPropGetter: PropTypes.func,
 
     /**
      * Optionally provide a function that returns an object of className or style props
@@ -770,7 +762,7 @@ class Calendar extends React.Component {
       context: this.getContext(this.props),
     }
   }
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({ context: this.getContext(nextProps) })
   }
 
@@ -784,8 +776,7 @@ class Calendar extends React.Component {
     resourceIdAccessor,
     resourceTitleAccessor,
     eventPropGetter,
-	slotPropGetter,
-	slotGroupPropGetter,
+    slotPropGetter,
     dayPropGetter,
     view,
     views,
@@ -804,9 +795,7 @@ class Calendar extends React.Component {
         eventProp: (...args) =>
           (eventPropGetter && eventPropGetter(...args)) || {},
         slotProp: (...args) =>
-		  (slotPropGetter && slotPropGetter(...args)) || {},
-		slotGroupProp: (...args) =>
-		  (slotGroupPropGetter && slotGroupPropGetter(...args)) || {},
+          (slotPropGetter && slotPropGetter(...args)) || {},
         dayProp: (...args) => (dayPropGetter && dayPropGetter(...args)) || {},
       },
       components: defaults(components[view] || {}, omit(components, names), {
@@ -953,9 +942,7 @@ class Calendar extends React.Component {
       if (viewComponent.range) {
         onRangeChange(viewComponent.range(date, { localizer }), view)
       } else {
-        if (process.env.NODE_ENV !== 'production') {
-          console.error('onRangeChange prop not supported for this view')
-        }
+        warning(true, 'onRangeChange prop not supported for this view')
       }
     }
   }

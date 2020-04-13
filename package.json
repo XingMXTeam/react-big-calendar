@@ -134,10 +134,12 @@
     "invariant": "^2.2.4",
     "lodash": "^4.17.11",
     "lodash-es": "^4.17.11",
-    "memoize-one": "^5.1.1",
+    "memoize-one": "^4.0.3",
+    "moment": "^2.24.0",
     "prop-types": "^15.6.2",
     "react-overlays": "^2.0.0-0",
-    "uncontrollable": "^7.0.0"
+    "uncontrollable": "^7.0.0",
+    "warning": "^4.0.2"
   },
   "resolutions": {
     "babel-core": "7.0.0-bridge.0"

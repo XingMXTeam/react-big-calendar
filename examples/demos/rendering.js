@@ -20,7 +20,8 @@ function EventAgenda({ event }) {
   )
 }
 
-const customDayPropGetter = date => {
+const customDayPropGetter = (date) => {
+
   if (date.getDate() === 7 || date.getDate() === 15)
     return {
       className: 'special-day',
@@ -32,11 +33,10 @@ const customDayPropGetter = date => {
 }
 
 const customSlotPropGetter = date => {
-  if (date.getDate() === 7 || date.getDate() === 15)
-    return {
-      className: 'special-day',
-    }
-  else return {}
+  console.log(111)
+  return {
+    className: 'special-hhhh',
+  }
 }
 
 let Rendering = ({ localizer }) => (

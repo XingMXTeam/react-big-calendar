@@ -133,7 +133,6 @@ class EventContainerWrapper extends React.Component {
 
   _selectable = () => {
     let node = findDOMNode(this)
-    let isBeingDragged = false
     let selector = (this._selector = new Selection(() =>
       node.closest('.rbc-time-view')
     ))
@@ -178,22 +177,16 @@ class EventContainerWrapper extends React.Component {
       this.handleDropFromOutside(point, bounds)
     })
 
-    selector.on('selectStart', () => {
-      isBeingDragged = true
-      this.context.draggable.onStart()
-    })
+    selector.on('selectStart', () => this.context.draggable.onStart())
 
     selector.on('select', point => {
       const bounds = getBoundsForNode(node)
-      isBeingDragged = false
+
       if (!this.state.event || !pointInColumn(bounds, point)) return
       this.handleInteractionEnd()
     })
 
-    selector.on('click', () => {
-      if (isBeingDragged) this.reset()
-      this.context.draggable.onEnd(null)
-    })
+    selector.on('click', () => this.context.draggable.onEnd(null))
 
     selector.on('reset', () => {
       this.reset()

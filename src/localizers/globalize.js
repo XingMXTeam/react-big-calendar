@@ -1,6 +1,7 @@
 import * as dates from '../utils/dates'
 import oldGlobalize from './oldGlobalize'
 import { DateLocalizer } from '../localizer'
+import warning from 'warning'
 
 let dateRangeFormat = ({ start, end }, culture, local) =>
   local.format(start, { date: 'short' }, culture) +
@@ -61,12 +62,11 @@ export default function(globalize) {
       const firstDay = weekData.firstDay[territory || '001']
       return days.indexOf(firstDay)
     } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(
-          'Failed to accurately determine first day of the week.' +
-            ' Is supplemental data loaded into CLDR?'
-        )
-      }
+      warning(
+        true,
+        `Failed to accurately determine first day of the week.
+            Is supplemental data loaded into CLDR?`
+      )
       // maybe cldr supplemental is not loaded? revert to original method
       const date = new Date()
       //cldr-data doesn't seem to be zero based
